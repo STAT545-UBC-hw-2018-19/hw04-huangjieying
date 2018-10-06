@@ -9,9 +9,12 @@ the core tidyverse package.
 
 ## Gather() and Spread()
 
-Let’s use *gapminder* data to explore these tools
+Let’s use *gapminder* data to explore these
+tools
 
 ### Gather()
+
+![](https://github.com/STAT545-UBC-students/hw04-huangjieying/blob/master/Figures/gather.png)
 
 I will use *t1* dataset to demonstrate `gather()`:
 
@@ -140,8 +143,9 @@ as an example, assume we want to combine country and lifeExp into one
 column:
 
 ``` r
-t2 %>% 
+t3=t2 %>% 
   unite(lifeInCountry, country, lifeExp, sep = ", ")
+t3
 ```
 
     ## # A tibble: 24 x 2
@@ -162,7 +166,32 @@ t2 %>%
 
 Now we have one column contain each country and its life expectancy. I
 found this function is very helpful in organizing summary of a
-regression model.
+regression model. As opposite of `unite()`, `seperate()` can be used to
+seperate one column into several.
+
+``` r
+t3 %>% 
+  separate(lifeInCountry, c("country", "lifeExp"),sep = ", ")
+```
+
+    ## # A tibble: 24 x 3
+    ## # Groups:   year [12]
+    ##     year country     lifeExp
+    ##    <int> <chr>       <chr>  
+    ##  1  1952 Afghanistan 28.801 
+    ##  2  1952 Israel      65.39  
+    ##  3  1957 Afghanistan 30.332 
+    ##  4  1957 Israel      67.84  
+    ##  5  1962 Afghanistan 31.997 
+    ##  6  1962 Israel      69.39  
+    ##  7  1967 Afghanistan 34.02  
+    ##  8  1967 Japan       71.43  
+    ##  9  1972 Afghanistan 36.088 
+    ## 10  1972 Japan       73.42  
+    ## # ... with 14 more rows
+
+One differece worth noticing is that the class of lifeExp is changed
+from double to character after we unite and separate the data.
 
 ## Cheatsheet for dyplr join functions (Join Prompts)
 

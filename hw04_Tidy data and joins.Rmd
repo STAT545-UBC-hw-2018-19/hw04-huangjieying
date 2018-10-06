@@ -18,6 +18,8 @@ Let's use _gapminder_ data to explore these tools
 
 ### Gather()
 
+![](https://github.com/STAT545-UBC-students/hw04-huangjieying/blob/master/Figures/gather.png)
+
 I will use _t1_ dataset to demonstrate `gather()`:
 ```{r}
 t1=gapminder %>%
@@ -62,12 +64,18 @@ t2 %>%
 We can use `unite() `function to combine two columns into one. Using _t2_ as an example, assume we want to combine country and lifeExp into one column:
 
 ```{r}
-t2 %>% 
+t3=t2 %>% 
   unite(lifeInCountry, country, lifeExp, sep = ", ")
-
+t3
 ```
 
-Now we have one column contain each country and its life expectancy. I found this function is very helpful in organizing summary of a regression model.
+Now we have one column contain each country and its life expectancy. I found this function is very helpful in organizing summary of a regression model. As opposite of `unite()`, `seperate()` can be used to seperate one column into several.
+
+```{r}
+t3 %>% 
+  separate(lifeInCountry, c("country", "lifeExp"),sep = ", ")
+```
+One differece worth noticing is that the class of lifeExp is changed from double to character after we unite and separate the data.
 
 ## Cheatsheet for dyplr join functions (Join Prompts)
 
