@@ -20,5 +20,7 @@ join function  | Definition
  `left_join`  |   left_join(x, y), matching rows from y to x
  `full_join`  |  full_join(x, y): Return all rows and all columns from both x and y.
 
-   
-For the join functions, the prompt that I have attempted is activity 1. A new data frame with extra column on spoken language is created [country_list.csv](https://github.com/STAT545-UBC-students/hw04-janehuang1647/blob/master/country_list.csv)and then this joined with the gapminder data frame using different join functions. The results and its explanation are presented here: [**Join Function**](https://github.com/STAT545-UBC-students/hw04-janehuang1647/blob/master/assignment_4.md#join-prompts-join-merge-look-up) 
+Here are links to different documents in this repo:
+* [Gapminder data exploration.Rmd](https://github.com/STAT545-UBC-students/hw03-huangjieying/blob/master/hw03%20use%20dplyr:ggplot2%20to%20manipulate%20and%20explore%20data.Rmd)
+* [Gapminder data exploration.md](https://github.com/STAT545-UBC-students/hw03-huangjieying/blob/master/hw03_use_dplyr_ggplot2_to_manipulate_and_explore_data.md)
+* [Figures and graphs](https://github.com/STAT545-UBC-students/hw03-huangjieying/tree/master/hw03_use_dplyr_ggplot2_to_manipulate_and_explore_data_files/figure-gfm)
