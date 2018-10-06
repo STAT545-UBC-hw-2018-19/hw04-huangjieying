@@ -87,6 +87,7 @@ flight2 = flights %>%
   
 flight2
 ```
+
 ## inner_join
 inner_join(x, y) is the simplest type of join. It matches pairs of observations whenever their keys are equal, i.e. it returns all columns from x and y. So it is a mutating join.
 
