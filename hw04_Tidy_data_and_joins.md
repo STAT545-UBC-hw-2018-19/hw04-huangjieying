@@ -300,7 +300,7 @@ flight2 ## I will use this data for following demonstration
     ## 14  2013     8     6     8 EWR    IAH   N12225  UA     
     ## 15  2013     9     6     8 LGA    IAH   N558UA  UA
 
-### Inner\_join
+### Inner\_join()
 
 Inner\_join(x, y) is the simplest type of join. It matches pairs of
 observations whenever their keys are equal, i.e. it returns all columns
@@ -343,7 +343,7 @@ flight2 %>%
 
 We can see that results only return to records when keys are equal.
 
-### Left\_join
+### Left\_join()
 
 left\_join(x, y) joins matching rows from y to x. Similar,
 `right_join()` matches rows from x to y.

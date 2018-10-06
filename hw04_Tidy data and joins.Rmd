@@ -112,7 +112,8 @@ flight2 = flights %>%
 flight2 ## I will use this data for following demonstration
 ```
 
-### Inner_join
+### Inner_join()
+
 Inner_join(x, y) is the simplest type of join. It matches pairs of observations whenever their keys are equal, i.e. it returns all columns from x and y. So it is a mutating join.
 
 Let's creat a dataset to join _flight2_
@@ -133,7 +134,8 @@ flight2 %>%
 ```
 We can see that results only return to records when keys are equal.
 
-### Left_join
+### Left_join()
+
 left_join(x, y) joins matching rows from y to x. Similar, `right_join()` matches rows from x to y.
 
 Let's try left_join and use _flight2_ for demonstration:
