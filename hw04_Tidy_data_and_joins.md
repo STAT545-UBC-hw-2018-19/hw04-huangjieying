@@ -3,17 +3,17 @@ Homework 04: Tidy data and joins
 
 ## Tidy Cheatsheet (Data Reshaping Prompts)
 
-This cheatsheet aim to explore several basic tools in tidyr that will
+This cheatsheet aims to explore several basic tools in tidyr that will
 help organize our data in a consistent way in R. Tidyr is a member of
 the core tidyverse package.
 
 ## Gather() and Spread()
 
-Let’s use gapminder data to explore these tools
+Let’s use *gapminder* data to explore these tools
 
 ### Gather()
 
-I will use t1 dataset to demonstrate `gather()`:
+I will use *t1* dataset to demonstrate `gather()`:
 
 ``` r
 t1=gapminder %>%
@@ -66,7 +66,7 @@ t1 %>%
 
 ### Spread()
 
-Using another data, t2, as an example: a tibble with 24 rows: 2 per
+Using another data, *t2*, as an example: a tibble with 24 rows: 2 per
 year, giving the country with both the lowest and highest life
 expectancy (in Asia)
 
@@ -135,7 +135,7 @@ t2 %>%
 
 ### Unite()
 
-We can use `unite()`function to combine two columns into one. Using t2
+We can use `unite()`function to combine two columns into one. Using *t2*
 as an example, assume we want to combine country and lifeExp into one
 column:
 
@@ -166,8 +166,8 @@ regression model.
 
 ## Cheatsheet for dyplr join functions (Join Prompts)
 
-I will use the nycflight13 package to explore different join functions
-in dyplr. nycflight13 contains several tibbles that are related to
+I will use the *nycflight13* package to explore different join functions
+in dyplr. *nycflight13* contains several tibbles that are related to
 flights. In this deomstration, I will only use follow two datasets:
 
 ``` r
@@ -216,8 +216,8 @@ airlines
     ## 15 WN      Southwest Airlines Co.     
     ## 16 YV      Mesa Airlines Inc.
 
-We can see that flights contains too many variables and observations, so
-let’s narrow the dataset before using it for demonstration.
+We can see that *flights* contains too many variables and observations,
+so let’s narrow the dataset before using it for demonstration.
 
 ``` r
 flight2 = flights %>% 
@@ -252,7 +252,7 @@ Inner\_join(x, y) is the simplest type of join. It matches pairs of
 observations whenever their keys are equal, i.e. it returns all columns
 from x and y. So it is a mutating join.
 
-Let’s creat a dataset to join flight2
+Let’s creat a dataset to join *flight2*
 
 ``` r
 dat1=tribble(
@@ -271,7 +271,7 @@ dat1
     ## 2 N14731      2
     ## 3 N438UA     12
 
-Now let’s join dat1 to flight2.
+Now let’s join dat1 to *flight2*.
 
 ``` r
 flight2 %>% 
@@ -291,8 +291,8 @@ We can see that results only return to records when keys are equal.
 
 ### Left\_join
 
-left\_join(x, y) joins matching rows from y to x. Similar, right\_join()
-matches rows from x to y.
+left\_join(x, y) joins matching rows from y to x. Similar,
+`right_join()` matches rows from x to y.
 
 Let’s try left\_join and use flight2 for demonstration:
 
@@ -320,7 +320,7 @@ flight2 %>%
     ## 14  2013     8     6     8 EWR    IAH   N12225  UA      United Air Lines …
     ## 15  2013     9     6     8 LGA    IAH   N558UA  UA      United Air Lines …
 
-The result of left join airlines to flight2 return an additional
+The result of left join *airlines* to *flight2* return an additional
 variable: name. I am wondering if any basic R functions could achieve
 the same outcome?
 
@@ -388,4 +388,4 @@ flight2 %>%
 
 Using full\_join we now have 30 records with later half of them filled
 by NA, compared to left\_join where we only have 15 records that matches
-flight2.
+*flight2*.

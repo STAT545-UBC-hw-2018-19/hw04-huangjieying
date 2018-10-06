@@ -3,7 +3,7 @@ title: 'Homework 04: Tidy data and joins'
 output: github_document
 ---
 ## Tidy Cheatsheet (Data Reshaping Prompts)
-This cheatsheet aim to explore several basic tools in tidyr that will help organize our data in a consistent way in R. Tidyr is a member of the core tidyverse package. 
+This cheatsheet aims to explore several basic tools in tidyr that will help organize our data in a consistent way in R. Tidyr is a member of the core tidyverse package. 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -14,11 +14,11 @@ suppressPackageStartupMessages(library(nycflights13))
 
 ## Gather() and Spread()
 
-Let's use gapminder data to explore these tools
+Let's use _gapminder_ data to explore these tools
 
 ### Gather()
 
-I will use t1 dataset to demonstrate `gather()`:
+I will use _t1_ dataset to demonstrate `gather()`:
 ```{r}
 t1=gapminder %>%
   filter(continent == "Asia" & year == "2002") %>%
@@ -38,7 +38,7 @@ t1 %>%
 
 ### Spread()
 
-Using another data, t2, as an example: a tibble with 24 rows: 2 per year, giving the country with both the lowest and highest life expectancy (in Asia)
+Using another data, _t2_, as an example: a tibble with 24 rows: 2 per year, giving the country with both the lowest and highest life expectancy (in Asia)
 ```{r}
 t2=gapminder %>%
   filter(continent == "Asia") %>%
@@ -59,7 +59,7 @@ t2 %>%
 
 ### Unite()
 
-We can use `unite() `function to combine two columns into one. Using t2 as an example, assume we want to combine country and lifeExp into one column:
+We can use `unite() `function to combine two columns into one. Using _t2_ as an example, assume we want to combine country and lifeExp into one column:
 
 ```{r}
 t2 %>% 
@@ -71,14 +71,14 @@ Now we have one column contain each country and its life expectancy. I found thi
 
 ## Cheatsheet for dyplr join functions (Join Prompts)
 
-I will use the nycflight13 package to explore different join functions in dyplr. nycflight13 contains several tibbles that are related to flights. In this deomstration, I will only use follow two datasets: 
+I will use the _nycflight13_ package to explore different join functions in dyplr. _nycflight13_ contains several tibbles that are related to flights. In this deomstration, I will only use follow two datasets: 
 ```{r}
 flights
 airlines
 ```
 
 
-We can see that flights contains too many variables and observations, so let's narrow the dataset before using it for demonstration.
+We can see that _flights_ contains too many variables and observations, so let's narrow the dataset before using it for demonstration.
 
 ```{r}
 flight2 = flights %>% 
@@ -91,7 +91,7 @@ flight2 ## I will use this data for following demonstration
 ### Inner_join
 Inner_join(x, y) is the simplest type of join. It matches pairs of observations whenever their keys are equal, i.e. it returns all columns from x and y. So it is a mutating join.
 
-Let's creat a dataset to join flight2
+Let's creat a dataset to join _flight2_
 ```{r}
 dat1=tribble(
   ~tailnum, ~month,
@@ -102,7 +102,7 @@ dat1=tribble(
 dat1
 ```
 
-Now let's join dat1 to flight2.
+Now let's join dat1 to _flight2_.
 ```{r}
 flight2 %>% 
   inner_join(dat1, by="month")
@@ -110,14 +110,14 @@ flight2 %>%
 We can see that results only return to records when keys are equal.
 
 ### Left_join
-left_join(x, y) joins matching rows from y to x. Similar, right_join() matches rows from x to y.
+left_join(x, y) joins matching rows from y to x. Similar, `right_join()` matches rows from x to y.
 
 Let's try left_join and use flight2 for demonstration:
 ```{r}
 flight2 %>% 
   left_join(airlines, by="carrier")
 ```
-The result of left join airlines to flight2 return an additional variable: name. I am wondering if any basic R functions could achieve the same outcome?
+The result of left join _airlines_ to _flight2_ return an additional variable: name. I am wondering if any basic R functions could achieve the same outcome?
 
 ### Comparing with R basic function `match()` 
 Same results as above left join can also be obtained using `mutate()` combining wtih with R basic function `match()`
@@ -139,7 +139,7 @@ flight2 %>%
   full_join(airlines, by="carrier")
 ```
 
-Using full_join we now have 30 records with later half of them filled by NA, compared to left_join where we only have 15 records that matches flight2.
+Using full_join we now have 30 records with later half of them filled by NA, compared to left_join where we only have 15 records that matches _flight2_.
 
 
 
