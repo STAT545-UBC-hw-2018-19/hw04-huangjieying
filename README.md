@@ -21,6 +21,5 @@ join function  | Definition
  `full_join`  |  full_join(x, y): Return all rows and all columns from both x and y.
 
 Here are links to different documents in this repo:
-* [Gapminder data exploration.Rmd](https://github.com/STAT545-UBC-students/hw03-huangjieying/blob/master/hw03%20use%20dplyr:ggplot2%20to%20manipulate%20and%20explore%20data.Rmd)
-* [Gapminder data exploration.md](https://github.com/STAT545-UBC-students/hw03-huangjieying/blob/master/hw03_use_dplyr_ggplot2_to_manipulate_and_explore_data.md)
-* [Figures and graphs](https://github.com/STAT545-UBC-students/hw03-huangjieying/tree/master/hw03_use_dplyr_ggplot2_to_manipulate_and_explore_data_files/figure-gfm)
+* [Tidy data and joins.Rmd](https://github.com/STAT545-UBC-students/hw04-huangjieying/blob/master/hw04_Tidy%20data%20and%20joins.Rmd)
+* [Tidy data and joins.md](https://github.com/STAT545-UBC-students/hw04-huangjieying/blob/master/hw04_Tidy_data_and_joins.md)
