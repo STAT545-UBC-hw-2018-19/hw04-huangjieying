@@ -14,7 +14,11 @@ tools
 
 ### Gather()
 
-![](https://github.com/STAT545-UBC-students/hw04-huangjieying/blob/master/Figures/gather.png)
+<p align="left">
+
+<img src="https://github.com/STAT545-UBC-students/hw04-huangjieying/blob/master/Figures/gather.png" height="100" width="300"/>
+
+</p>
 
 I will use *t1* dataset to demonstrate `gather()`:
 
@@ -68,6 +72,12 @@ t1 %>%
     ## # ... with 56 more rows
 
 ### Spread()
+
+<p align="left">
+
+<img src="https://github.com/STAT545-UBC-students/hw04-huangjieying/blob/master/Figures/spread.png" height="100" width="300"/>
+
+</p>
 
 Using another data, *t2*, as an example: a tibble with 24 rows: 2 per
 year, giving the country with both the lowest and highest life
@@ -138,6 +148,12 @@ t2 %>%
 
 ### Unite()
 
+<p align="left">
+
+<img src="https://github.com/STAT545-UBC-students/hw04-huangjieying/blob/master/Figures/unitepng.png" height="100" width="300"/>
+
+</p>
+
 We can use `unite()`function to combine two columns into one. Using *t2*
 as an example, assume we want to combine country and lifeExp into one
 column:
@@ -167,7 +183,16 @@ t3
 Now we have one column contain each country and its life expectancy. I
 found this function is very helpful in organizing summary of a
 regression model. As opposite of `unite()`, `seperate()` can be used to
-seperate one column into several.
+seperate one column into
+several.
+
+### Seperate()
+
+<p align="left">
+
+<img src="https://github.com/STAT545-UBC-students/hw04-huangjieying/blob/master/Figures/separate.png" height="100" width="300"/>
+
+</p>
 
 ``` r
 t3 %>% 
