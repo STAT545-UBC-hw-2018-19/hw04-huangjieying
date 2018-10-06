@@ -112,7 +112,7 @@ We can see that results only return to records when keys are equal.
 ### Left_join
 left_join(x, y) joins matching rows from y to x. Similar, `right_join()` matches rows from x to y.
 
-Let's try left_join and use flight2 for demonstration:
+Let's try left_join and use _flight2_ for demonstration:
 ```{r}
 flight2 %>% 
   left_join(airlines, by="carrier")

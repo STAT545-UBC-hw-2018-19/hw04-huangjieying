@@ -294,7 +294,7 @@ We can see that results only return to records when keys are equal.
 left\_join(x, y) joins matching rows from y to x. Similar,
 `right_join()` matches rows from x to y.
 
-Let’s try left\_join and use flight2 for demonstration:
+Let’s try left\_join and use *flight2* for demonstration:
 
 ``` r
 flight2 %>% 
