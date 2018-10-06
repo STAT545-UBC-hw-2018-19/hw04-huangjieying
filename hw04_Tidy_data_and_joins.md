@@ -1,19 +1,19 @@
 Homework 04: Tidy data and joins
 ================
 
-# Tidy Cheatsheet (Data Reshaping Prompts)
+## Tidy Cheatsheet (Data Reshaping Prompts)
 
 This cheatsheet aim to explore several basic tools in tidyr that will
 help organize our data in a consistent way in R. Tidyr is a member of
 the core tidyverse package.
 
-# gather() and spread()
+## Gather() and Spread()
 
 Let’s use gapminder data to explore these tools
 
-## gather()
+### Gather()
 
-Using t1 dataset as an example:
+I will use t1 dataset to demonstrate `gather()`:
 
 ``` r
 t1=gapminder %>%
@@ -64,11 +64,11 @@ t1 %>%
     ## 10  2002 China       lifeExp           72.0
     ## # ... with 56 more rows
 
-## spread()
+### Spread()
 
-Using another table as an example: a tibble with 24 rows: 2 per year,
-giving the country with both the lowest and highest life expectancy (in
-Asia)
+Using another data, t2, as an example: a tibble with 24 rows: 2 per
+year, giving the country with both the lowest and highest life
+expectancy (in Asia)
 
 ``` r
 t2=gapminder %>%
@@ -109,7 +109,7 @@ t2=gapminder %>%
     ## 23  2007 Afghanistan    43.8
     ## 24  2007 Japan          82.6
 
-Now I want to turn the table into one row per year
+Now I want to turn the table into one row per year using `spread()`
 
 ``` r
 t2 %>% 
@@ -133,7 +133,7 @@ t2 %>%
     ## 11  2002        42.1     NA     NA    82  
     ## 12  2007        43.8     NA     NA    82.6
 
-## Unite()
+### Unite()
 
 We can use `unite()`function to combine two columns into one. Using t2
 as an example, assume we want to combine country and lifeExp into one
@@ -160,13 +160,37 @@ t2 %>%
     ## 10  1972 Japan, 73.42       
     ## # ... with 14 more rows
 
-Now we have one column contain each country and its life expectancy
+Now we have one column contain each country and its life expectancy. I
+found this function is very helpful in organizing summary of a
+regression model.
 
-# Cheatsheet for dyplr join functions (Join Prompts)
+## Cheatsheet for dyplr join functions (Join Prompts)
 
 I will use the nycflight13 package to explore different join functions
 in dyplr. nycflight13 contains several tibbles that are related to
-flights. for example:
+flights. In this deomstration, I will only use follow two datasets:
+
+``` r
+flights
+```
+
+    ## # A tibble: 336,776 x 19
+    ##     year month   day dep_time sched_dep_time dep_delay arr_time
+    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
+    ##  1  2013     1     1      517            515         2      830
+    ##  2  2013     1     1      533            529         4      850
+    ##  3  2013     1     1      542            540         2      923
+    ##  4  2013     1     1      544            545        -1     1004
+    ##  5  2013     1     1      554            600        -6      812
+    ##  6  2013     1     1      554            558        -4      740
+    ##  7  2013     1     1      555            600        -5      913
+    ##  8  2013     1     1      557            600        -3      709
+    ##  9  2013     1     1      557            600        -3      838
+    ## 10  2013     1     1      558            600        -2      753
+    ## # ... with 336,766 more rows, and 12 more variables: sched_arr_time <int>,
+    ## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
+    ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
+    ## #   minute <dbl>, time_hour <dttm>
 
 ``` r
 airlines
@@ -192,56 +216,15 @@ airlines
     ## 15 WN      Southwest Airlines Co.     
     ## 16 YV      Mesa Airlines Inc.
 
-``` r
-flights
-```
-
-    ## # A tibble: 336,776 x 19
-    ##     year month   day dep_time sched_dep_time dep_delay arr_time
-    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
-    ##  1  2013     1     1      517            515         2      830
-    ##  2  2013     1     1      533            529         4      850
-    ##  3  2013     1     1      542            540         2      923
-    ##  4  2013     1     1      544            545        -1     1004
-    ##  5  2013     1     1      554            600        -6      812
-    ##  6  2013     1     1      554            558        -4      740
-    ##  7  2013     1     1      555            600        -5      913
-    ##  8  2013     1     1      557            600        -3      709
-    ##  9  2013     1     1      557            600        -3      838
-    ## 10  2013     1     1      558            600        -2      753
-    ## # ... with 336,766 more rows, and 12 more variables: sched_arr_time <int>,
-    ## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
-    ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
-    ## #   minute <dbl>, time_hour <dttm>
-
-``` r
-airports
-```
-
-    ## # A tibble: 1,458 x 8
-    ##    faa   name                   lat    lon   alt    tz dst   tzone        
-    ##    <chr> <chr>                <dbl>  <dbl> <int> <dbl> <chr> <chr>        
-    ##  1 04G   Lansdowne Airport     41.1  -80.6  1044    -5 A     America/New_…
-    ##  2 06A   Moton Field Municip…  32.5  -85.7   264    -6 A     America/Chic…
-    ##  3 06C   Schaumburg Regional   42.0  -88.1   801    -6 A     America/Chic…
-    ##  4 06N   Randall Airport       41.4  -74.4   523    -5 A     America/New_…
-    ##  5 09J   Jekyll Island Airpo…  31.1  -81.4    11    -5 A     America/New_…
-    ##  6 0A9   Elizabethton Munici…  36.4  -82.2  1593    -5 A     America/New_…
-    ##  7 0G6   Williams County Air…  41.5  -84.5   730    -5 A     America/New_…
-    ##  8 0G7   Finger Lakes Region…  42.9  -76.8   492    -5 A     America/New_…
-    ##  9 0P2   Shoestring Aviation…  39.8  -76.6  1000    -5 U     America/New_…
-    ## 10 0S9   Jefferson County In…  48.1 -123.    108    -8 A     America/Los_…
-    ## # ... with 1,448 more rows
-
 We can see that flights contains too many variables and observations, so
-let’s narrow the dataset before using it as an example.
+let’s narrow the dataset before using it for demonstration.
 
 ``` r
 flight2 = flights %>% 
   filter(day=="6" & hour=="8" & dest == "IAH") %>% 
   select(year:day, hour, origin, dest, tailnum, carrier)
   
-flight2
+flight2 ## I will use this data for following demonstration
 ```
 
     ## # A tibble: 15 x 8
@@ -263,22 +246,22 @@ flight2
     ## 14  2013     8     6     8 EWR    IAH   N12225  UA     
     ## 15  2013     9     6     8 LGA    IAH   N558UA  UA
 
-## inner\_join
+### Inner\_join
 
-inner\_join(x, y) is the simplest type of join. It matches pairs of
+Inner\_join(x, y) is the simplest type of join. It matches pairs of
 observations whenever their keys are equal, i.e. it returns all columns
 from x and y. So it is a mutating join.
 
 Let’s creat a dataset to join flight2
 
 ``` r
-t=tribble(
+dat1=tribble(
   ~tailnum, ~month,
   "N76502", 1, 
   "N14731", 2,
   "N438UA", 12
   )
-t
+dat1
 ```
 
     ## # A tibble: 3 x 2
@@ -288,11 +271,11 @@ t
     ## 2 N14731      2
     ## 3 N438UA     12
 
-Now let’s join t to flight2.
+Now let’s join dat1 to flight2.
 
 ``` r
 flight2 %>% 
-  inner_join(t, by="month")
+  inner_join(dat1, by="month")
 ```
 
     ## # A tibble: 5 x 9
@@ -306,12 +289,12 @@ flight2 %>%
 
 We can see that results only return to records when keys are equal.
 
-## left\_join
+### Left\_join
 
 left\_join(x, y) joins matching rows from y to x. Similar, right\_join()
-joins matching rows from x to y.
+matches rows from x to y.
 
-Let’s try left\_join and use flight2 as an example:
+Let’s try left\_join and use flight2 for demonstration:
 
 ``` r
 flight2 %>% 
@@ -338,12 +321,13 @@ flight2 %>%
     ## 15  2013     9     6     8 LGA    IAH   N558UA  UA      United Air Lines …
 
 The result of left join airlines to flight2 return an additional
-variable: name.
+variable: name. I am wondering if any basic R functions could achieve
+the same outcome?
 
-## Compare with R basic function `match()` ?
+### Comparing with R basic function `match()`
 
-Same results can be obtained using `mutate()` combining wtih with R
-basic function `match()`
+Same results as above left join can also be obtained using `mutate()`
+combining wtih with R basic function `match()`
 
 ``` r
 flight2 %>% 
@@ -369,11 +353,11 @@ flight2 %>%
     ## 14  2013     8     6     8 EWR    IAH   N12225  UA      United Air Lines …
     ## 15  2013     9     6     8 LGA    IAH   N558UA  UA      United Air Lines …
 
-But this way is harder to think through and apply when there are
-multiple variables. More importantly, the code itself require extra
-efforts to understand its intention.
+It generates exactly same result\! But this way is harder to think
+through and apply when there are multiple variables. More importantly,
+the code itself require extra efforts to understand its intention.
 
-## full\_join()
+### Full\_join()
 
 full\_join(x, y): Return all rows and all columns from both x and y.
 Where there are not matching values, returns NA for the one missing.

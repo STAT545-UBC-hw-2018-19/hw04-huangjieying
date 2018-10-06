@@ -2,7 +2,7 @@
 title: 'Homework 04: Tidy data and joins'
 output: github_document
 ---
-# Tidy Cheatsheet (Data Reshaping Prompts)
+## Tidy Cheatsheet (Data Reshaping Prompts)
 This cheatsheet aim to explore several basic tools in tidyr that will help organize our data in a consistent way in R. Tidyr is a member of the core tidyverse package. 
 
 ```{r setup, include=FALSE}
@@ -12,13 +12,13 @@ suppressPackageStartupMessages(library(gapminder))
 suppressPackageStartupMessages(library(nycflights13))
 ```
 
-# gather() and spread()
+## Gather() and Spread()
 
 Let's use gapminder data to explore these tools
 
-## gather()
+### Gather()
 
-Using t1 dataset as an example:
+I will use t1 dataset to demonstrate `gather()`:
 ```{r}
 t1=gapminder %>%
   filter(continent == "Asia" & year == "2002") %>%
@@ -36,9 +36,9 @@ t1 %>%
 ```
 
 
-## spread()
+### Spread()
 
-Using another table as an example: a tibble with 24 rows: 2 per year, giving the country with both the lowest and highest life expectancy (in Asia)
+Using another data, t2, as an example: a tibble with 24 rows: 2 per year, giving the country with both the lowest and highest life expectancy (in Asia)
 ```{r}
 t2=gapminder %>%
   filter(continent == "Asia") %>%
@@ -49,7 +49,7 @@ t2=gapminder %>%
   print(n = Inf)
 ```
 
-Now I want to turn the table into one row per year
+Now I want to turn the table into one row per year using `spread()`
 
 ```{r}
 t2 %>% 
@@ -57,7 +57,7 @@ t2 %>%
 
 ```
 
-## Unite()
+### Unite()
 
 We can use `unite() `function to combine two columns into one. Using t2 as an example, assume we want to combine country and lifeExp into one column:
 
@@ -67,69 +67,69 @@ t2 %>%
 
 ```
 
-Now we have one column contain each country and its life expectancy
+Now we have one column contain each country and its life expectancy. I found this function is very helpful in organizing summary of a regression model.
 
-# Cheatsheet for dyplr join functions (Join Prompts)
+## Cheatsheet for dyplr join functions (Join Prompts)
 
-I will use the nycflight13 package to explore different join functions in dyplr. nycflight13 contains several tibbles that are related to flights. for example:
+I will use the nycflight13 package to explore different join functions in dyplr. nycflight13 contains several tibbles that are related to flights. In this deomstration, I will only use follow two datasets: 
 ```{r}
-airlines
 flights
-airports
+airlines
 ```
 
-We can see that flights contains too many variables and observations, so let's narrow the dataset before using it as an example.
+
+We can see that flights contains too many variables and observations, so let's narrow the dataset before using it for demonstration.
 
 ```{r}
 flight2 = flights %>% 
   filter(day=="6" & hour=="8" & dest == "IAH") %>% 
   select(year:day, hour, origin, dest, tailnum, carrier)
   
-flight2
+flight2 ## I will use this data for following demonstration
 ```
 
-## inner_join
-inner_join(x, y) is the simplest type of join. It matches pairs of observations whenever their keys are equal, i.e. it returns all columns from x and y. So it is a mutating join.
+### Inner_join
+Inner_join(x, y) is the simplest type of join. It matches pairs of observations whenever their keys are equal, i.e. it returns all columns from x and y. So it is a mutating join.
 
 Let's creat a dataset to join flight2
 ```{r}
-t=tribble(
+dat1=tribble(
   ~tailnum, ~month,
   "N76502", 1, 
   "N14731", 2,
   "N438UA", 12
   )
-t
+dat1
 ```
 
-Now let's join t to flight2.
+Now let's join dat1 to flight2.
 ```{r}
 flight2 %>% 
-  inner_join(t, by="month")
+  inner_join(dat1, by="month")
 ```
 We can see that results only return to records when keys are equal.
 
-## left_join
-left_join(x, y) joins matching rows from y to x. Similar, right_join() joins matching rows from x to y.
+### Left_join
+left_join(x, y) joins matching rows from y to x. Similar, right_join() matches rows from x to y.
 
-Let's try left_join and use flight2 as an example:
+Let's try left_join and use flight2 for demonstration:
 ```{r}
 flight2 %>% 
   left_join(airlines, by="carrier")
 ```
-The result of left join airlines to flight2 return an additional variable: name. 
+The result of left join airlines to flight2 return an additional variable: name. I am wondering if any basic R functions could achieve the same outcome?
 
-## Compare with R basic function `match()` ?
-Same results can be obtained using `mutate()` combining wtih with R basic function `match()`
+### Comparing with R basic function `match()` 
+Same results as above left join can also be obtained using `mutate()` combining wtih with R basic function `match()`
 
 ```{r}
 flight2 %>% 
   mutate(name=airlines$name[match(carrier, airlines$carrier)])
 ```
 
-But this way is harder to think through and apply when there are multiple variables. More importantly, the code itself require extra efforts to understand its intention.
+It generates exactly same result! But this way is harder to think through and apply when there are multiple variables. More importantly, the code itself require extra efforts to understand its intention.
 
-## full_join()
+### Full_join()
 
 full_join(x, y): Return all rows and all columns from both x and y. Where there are not matching values, returns NA for the one missing. This type of join could be very helpful when dealing with real data, which we want to keep all records.
 
